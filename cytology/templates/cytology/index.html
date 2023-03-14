@@ -1,0 +1,11 @@
+<a href="/cytology/sample">Add New Sample</a>
+
+{% if samples_list %}
+    <ul>
+    {% for sample in samples_list %}
+        <li><a href="/cytology/{{ sample.id }}/results">{{ sample.patient_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No samples are available.</p>
+{% endif %}
