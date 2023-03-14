@@ -1,4 +1,7 @@
 from django import forms
+from .models import *
 
-class SampleForm(forms.Form):
-    patient_name = forms.CharField(label='Patient Name', max_length=100)
+class SampleForm(forms.ModelForm):
+    class Meta:
+        model = Sample
+        fields = ['patient_name', 'sample_Img']
