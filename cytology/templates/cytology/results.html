@@ -1,7 +1,28 @@
-<ul>Patient Name: {{ sample }}</ul>
-<ul>Sample Taken: {{ sample.sample_date}}</ul>
-<ul>Image: {{ sample.sample_Img}}</ul>
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
-{% block content %}
-    <img src="{{ sample.sample_Img.url }}">
-{% endblock %}
+
+<div class="container">
+    <!-- Content here -->
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Patient Name</th>
+            <th scope="col">Date Sampled</th>
+            <th scope="col">Sample</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ sample }}</td>
+            <td>{{ sample.sample_date}}</td>
+            <td>{{ sample.sample_Img}}</td>
+          </tr>
+        </tbody>
+      </table>
+    <img src="{{ sample.sample_Img.url }}" class="img-thumbnail" alt="Patient Sample">
+</div>
+
+
+

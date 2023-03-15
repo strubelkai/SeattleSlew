@@ -1,11 +1,54 @@
-<a href="/cytology/sample">Add New Sample</a>
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
-{% if samples_list %}
-    <ul>
-    {% for sample in samples_list %}
-        <li><a href="/cytology/{{ sample.id }}/results">{{ sample.patient_name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No samples are available.</p>
-{% endif %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Samples</title>
+  </head>
+  <body>
+    <div class="container">
+        <nav class="navbar bg-dark" data-bs-theme="dark">
+            <div class="container-fluid">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="#">Equine Lung Experts</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/cytology/sample">Add New Sample</a>
+                    </li>
+                </ul>       
+            </div>
+        </nav>
+        
+        {% if samples_list %}
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Patient Name</th>
+                <th scope="col">Date Submitted</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for sample in samples_list %}
+              <tr>
+                <td><a href="/cytology/{{ sample.id }}/results">{{ sample.patient_name }}</a></td>
+                <td>{{ sample.sample_date }}</td>
+              </tr>
+            {% endfor %}    
+            </tbody>
+          </table>
+        {% else %}
+            <h1>No samples are available.</h1>
+        {% endif %}
+    </div>
+
+  </body>
+</html>
+
+
+
+

@@ -1,5 +1,28 @@
-<form action="/cytology/sample/" method="post"  enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
-</form>
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sample Submission</title>
+  </head>
+  <body>
+    <div class="container">
+        <h1>Submit a Sample</h1>
+        <form action="/cytology/sample/" method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+        
+            {% bootstrap_form form %}
+        
+            {% bootstrap_button button_type="submit" content="OK" %}
+            {% bootstrap_button button_type="reset" content="Cancel" %}
+        </form>
+    </div>
+
+  </body>
+</html>
+
+
+
