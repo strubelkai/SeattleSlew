@@ -90,6 +90,20 @@ DATABASES = {
     }
 }
 
+DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+STATIC_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+STATIC_LOCATION = "static"
+MEDIA_LOCATION = "media"
+
+
+AZURE_ACCOUNT_NAME = "seattleslew"
+AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+AZURE_CONTAINER = "static"
+AZURE_ACCOUNT_KEY = os.environ['AZURE_STORAGE_KEY']
+STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -125,7 +139,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -133,7 +147,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Base url to serve media files
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
 
 # Path where media is stored
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

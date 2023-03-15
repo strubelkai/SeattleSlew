@@ -3,7 +3,6 @@ from django.shortcuts import render
 from .models import Sample
 from .forms import SampleForm
 
-
 def index(request):
     samples_list = Sample.objects.order_by('-sample_date')[:5]
     context = {
