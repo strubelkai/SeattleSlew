@@ -1,0 +1,28 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load static %}
+
+
+<div class="container">
+    <!-- Content here -->
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Patient Name</th>
+            <th scope="col">Date Sampled</th>
+            <th scope="col">Sample</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ sample }}</td>
+            <td>{{ sample.sample_date}}</td>
+            <td>{{ sample.sample_Img}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+
+

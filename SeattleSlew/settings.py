@@ -91,6 +91,10 @@ DATABASES = {
     }
 }
 
+STATICFILES_DIRS = [
+    BASE_DIR / "staticfiles",
+]
+
 DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 STATIC_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 STATIC_LOCATION = "static"
