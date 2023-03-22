@@ -4,6 +4,18 @@
 
 
 <div class="container">
+    <nav class="navbar bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/cytology/">Equine Lung Experts</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/cytology/sample">Add New Sample</a>
+                </li>
+            </ul>       
+        </div>
+    </nav>
     <!-- Content here -->
     <table class="table">
         <thead>
@@ -11,19 +23,23 @@
             <th scope="col">Patient Name</th>
             <th scope="col">Date Sampled</th>
             <th scope="col">Sample</th>
+            <th scope="col">Analyze</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>{{ sample }}</td>
             <td>{{ sample.sample_date}}</td>
-            <td>{{ sample.sample_Img}}</td>
+            <td>
+              {{ sample.sample_Img}}
+            </td>
+            <td>
+              <a href="/cytology/{{ sample.id }}/detection"><button type="button" class="btn btn-primary">Run</button></a>
+            </td>
           </tr>
         </tbody>
       </table>
-    <div>
-      <a href="/cytology/{{ sample.id }}/detection"><button type="button" class="btn btn-primary btn-lg btn-block">Analyze</button></a>
-    </div>
+
     <img src="{{ sample.sample_Img.url }}" class="img-thumbnail" alt="Patient Sample">
 </div>
 
