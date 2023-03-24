@@ -21,7 +21,8 @@ def YoloV5(f):
 
         print("FILE NAME:", f)
         # Model
-        model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
+        model_url = os.path.join(settings.BASE_DIR, 'cytology/yolo/best.pt') 
+        model = torch.hub.load('ultralytics/yolov5',  'custom', path=model_url, force_reload=True)
         
         # Images
         response = requests.get('https://seattleslew.blob.core.windows.net/static/' + f)

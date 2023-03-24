@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .models import Sample
 from .forms import SampleForm
-from .yolo import YoloV5
+from .tasks import YoloV5
 from django.conf import settings
 import os
 
@@ -30,7 +30,7 @@ def detection(request, sample_id):
         YoloV5(str(sample.sample_Img))
         img_url = os.path.join(settings.BASE_DIR, 'staticfiles/images/image0.jpg')     
     except Question.DoesNotExist:
-        raise Http404("Question does not exist")
+        raise Http404("Analysis Failed")
     return HttpResponseRedirect('/cytology/'+str(sample.id)+'/results')
 
 
