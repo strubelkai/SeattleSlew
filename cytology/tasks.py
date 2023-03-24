@@ -1,4 +1,4 @@
-from celery import shared_task
+#from celery import shared_task
 import cv2
 import torch
 from django.conf import settings
@@ -7,14 +7,13 @@ import requests
 from io import BytesIO
 import os
 from cytology.models import Sample
+from django.core.files.storage import default_storage as storage
 
-@shared_task
 def rename_sample(widget_id, name):
     s = Sample.objects.get(id=widget_id)
     s.name = name
     s.save()
 
-@shared_task
 def YoloV5(f):
         print("Task for FILE NAME:", f)
         # Model
@@ -22,9 +21,9 @@ def YoloV5(f):
         model = torch.hub.load('ultralytics/yolov5',  'custom', path=model_url, force_reload=True)
         
         # Images
-        response = requests.get('https://seattleslew.blob.core.windows.net/static/' + f)
-        im1 = Image.open(BytesIO(response.content))
-
+        response =  storage.open(f).read()
+        im1 = Image.open(BytesIO(response))
+        
         # Inference
         results = model([im1], size=640) # batch of images
 

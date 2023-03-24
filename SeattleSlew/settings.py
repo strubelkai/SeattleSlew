@@ -13,6 +13,15 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 
+from azure.keyvault.secrets import SecretClient
+from azure.identity import DefaultAzureCredential
+
+from decouple import config
+kvEndpoint = config("KV_ENDPOINT")
+
+credential = DefaultAzureCredential(exclude_shared_token_cache_credential=True)
+client = SecretClient(vault_url=kvEndpoint, credential=credential)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -39,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_results',
     'bootstrap5',
 ]
 
@@ -79,7 +89,7 @@ WSGI_APPLICATION = 'SeattleSlew.wsgi.application'
 
 # Configure Postgres database based on connection string of the libpq Keyword/Value form
 # https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING
-conn_str = os.environ['AZURE_POSTGRESQL_CONNECTIONSTRING']
+conn_str = client.get_secret('PostgreSQLPythonConnection').value
 conn_str_params = {pair.split('=')[0]: pair.split('=')[1] for pair in conn_str.split(' ')}
 DATABASES = {
     'default': {
@@ -97,16 +107,14 @@ STATICFILES_DIRS = [
 
 DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 STATIC_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+AZURE_CONNECTION_STRING = client.get_secret('StorageConnection').value
+
 STATIC_LOCATION = "static"
+STATIC_URL = f'/static/'
 MEDIA_LOCATION = "media"
 
-
 AZURE_ACCOUNT_NAME = "seattleslew"
-AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
 AZURE_CONTAINER = "static"
-AZURE_ACCOUNT_KEY = os.environ['AZURE_STORAGE_KEY']
-STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
-MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
 
 
 
@@ -156,3 +164,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Path where media is stored
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'
+# celery setting.
+CELERY_CACHE_BACKEND = 'default'
+
+# django setting.
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'my_cache_table',
+    }
+}

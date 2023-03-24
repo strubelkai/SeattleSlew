@@ -6,9 +6,6 @@ from .tasks import YoloV5
 from django.conf import settings
 import os
 
-
-
-
 def index(request):
     samples_list = Sample.objects.order_by('-sample_date')[:5]
     context = {
@@ -20,16 +17,16 @@ def index(request):
 def results(request, sample_id):
     try:
         sample = Sample.objects.get(pk=sample_id)
-    except Question.DoesNotExist:
-        raise Http404("Question does not exist")
+    except Sample.DoesNotExist:
+        raise Http404("Sample does not exist")
     return render(request, 'cytology/results.html', {'sample': sample})
 
 def detection(request, sample_id):
     try:
         sample = Sample.objects.get(pk=sample_id)
         YoloV5(str(sample.sample_Img))
-        img_url = os.path.join(settings.BASE_DIR, 'staticfiles/images/image0.jpg')     
-    except Question.DoesNotExist:
+        #img_url = os.path.join(settings.BASE_DIR, 'staticfiles/images/image0.jpg')     
+    except Sample.DoesNotExist:
         raise Http404("Analysis Failed")
     return HttpResponseRedirect('/cytology/'+str(sample.id)+'/results')
 

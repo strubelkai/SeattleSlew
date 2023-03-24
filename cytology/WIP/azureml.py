@@ -1,3 +1,5 @@
+# Unused file, was attempting to host a model on endpoint
+
 from azure.ai.ml import MLClient
 from azure.ai.ml.entities import (
     ManagedOnlineEndpoint,
