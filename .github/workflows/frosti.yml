@@ -101,7 +101,12 @@ jobs:
     needs: [InfraProvision]
     steps:
       - uses: actions/checkout@v2
-
+      
+      - name: Create requirements.txt
+        uses: ryan-rozario/pipreqs-action-cpy@master
+        with:
+          REQUIREMENT_PATH: requirements.txt
+          
       - name: Setup Python version
         uses: actions/setup-python@v2
         with:
