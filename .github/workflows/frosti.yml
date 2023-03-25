@@ -118,7 +118,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           
       - name: Display
-        run: echo "${{ steps.run-frosti.outputs.WEB_APP_NAME }}"
+        run: echo "${{ needs.infraProvision.outputs.WEB_APP_NAME }}"
         
       - name: Static collection and set migration command on App Service
         uses: Azure/appservice-settings@v1
