@@ -41,14 +41,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'cytology.apps.CytologyConfig',
+    'cytology',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_celery_results',
     'bootstrap5',
 ]
 
@@ -101,21 +100,14 @@ DATABASES = {
     }
 }
 
-STATICFILES_DIRS = [
-    BASE_DIR / "staticfiles",
-]
 
 DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 STATIC_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+
+
 AZURE_CONNECTION_STRING = client.get_secret('StorageConnection').value
-
-STATIC_LOCATION = "static"
-STATIC_URL = f'/static/'
-MEDIA_LOCATION = "media"
-
-AZURE_ACCOUNT_NAME = "seattleslew"
 AZURE_CONTAINER = "static"
-
+STATIC_URL = f'/static/'
 
 
 # Password validation
