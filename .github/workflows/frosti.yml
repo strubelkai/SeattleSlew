@@ -33,7 +33,7 @@ jobs:
             az account show
             brew update
             brew install CirroBuild/tap/frosti
-            myAppNames=`frosti provision -s 8850fa2d-2fec-446e-81ce-0866bd59fc04 -r github -e ppe -n cytology
+            myAppNames=`frosti provision -s 8850fa2d-2fec-446e-81ce-0866bd59fc04 -r github -e ppe -n cytology`
             echo $myAppNames
             myWebApp=`echo $myAppNames | grep WebAppName | sed -e 's/WebAppName://g'`
             myFunctionApp=`echo $myAppNames | grep FunctionAppName | sed -e 's/FunctionAppName://g'`
