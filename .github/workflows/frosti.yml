@@ -96,7 +96,7 @@ jobs:
           az logout
 
   DeployDjango:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     if: ${{ 'django' == 'django' }}
     needs: [InfraProvision]
     steps:
