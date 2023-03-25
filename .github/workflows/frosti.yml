@@ -33,7 +33,7 @@ jobs:
             az account show
             brew update
             brew install CirroBuild/tap/frosti
-            myAppNames=`frosti provision -s 8850fa2d-2fec-446e-81ce-0866bd59fc04 -r github -e ppe -n cytology`
+            myAppNames=`frosti provision -s 8850fa2d-2fec-446e-81ce-0866bd59fc04 -r github -e ppe -n cytology | grep -E 'WebAppName|FunctionAppName'`
             echo $myAppNames
             myWebApp=`echo $myAppNames | grep WebAppName | sed -e 's/WebAppName://g'`
             myFunctionApp=`echo $myAppNames | grep FunctionAppName | sed -e 's/FunctionAppName://g'`
@@ -41,7 +41,7 @@ jobs:
             echo "FUNCTION_APP_NAME=$myFunctionApp" >> $GITHUB_OUTPUT
             
       - name: Display
-        run: echo "${{ steps.run-frosti.outputs.FUNCTION_APP_NAME }}"
+        run: echo "${{ steps.run-frosti.outputs.WEB_APP_NAME }}"
             
   DeployDotNet:
     runs-on: macos-latest
@@ -117,6 +117,9 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           
+      - name: Display
+        run: echo "${{ steps.run-frosti.outputs.WEB_APP_NAME }}"
+        
       - name: Static collection and set migration command on App Service
         uses: Azure/appservice-settings@v1
         with:  
