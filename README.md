@@ -3,10 +3,9 @@ Background: [Equine Lung Experts](https://www.equinelungexperts.com/) is a diagn
 
 Project: Today this process of gathering samples, mailing them in for analysis and returning to customer is very manually intensive. A simple cloud hosted web app would greatly streamline the process.
 
-[Demo](https://www.youtube.com/watch?v=LJqrXAxcLzY)
-
 ![image](https://github.com/strubelkai/SeattleSlew/assets/122396447/9a9090eb-fbaf-419f-9b7a-5de50e50df68)
 
+Demo: [![Demo of Web App](http://img.youtube.com/vi/LJqrXAxcLzY/0.jpg)](http://www.youtube.com/watch?v=LJqrXAxcLzY)
 
 Django Web Application hosted on Azure App Service:
 -  Allows user to upload photo to be stored in cloud storage (Azure Blob)
