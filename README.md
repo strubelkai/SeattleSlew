@@ -1,14 +1,18 @@
 Background: 
+
 [Equine Lung Experts](https://www.equinelungexperts.com/) is a diagnostic labs service. Veterinary diagnostic laboratories don't have the specialized knowledge in equine pulmonology to accurately diagnose respiratory diseases based on bronchoalveolar lavage fluid cytology samples. As leading specialists in horse asthma (heaves, RAO, IAD, COPD, and chronic bronchitis), exercise-induced pulmonary hemorrhage 
 (EIPH or epistaxis), and other respiratory diseases affecting performance, we provide in-depth evaluations of pulmonary health and risk factors. 
 
 Project: 
+
 Today this process of gathering samples, mailing them in for analysis and returning to customer is very manually intensive. A simple cloud hosted web app would greatly streamline the process.
 
 Workflow:
+
 ![image](https://github.com/strubelkai/SeattleSlew/assets/122396447/9a9090eb-fbaf-419f-9b7a-5de50e50df68)
 
 Demo of Web App: 
+
 [![Demo of Web App](http://img.youtube.com/vi/LJqrXAxcLzY/0.jpg)](http://www.youtube.com/watch?v=LJqrXAxcLzY)
 
 Django Web Application hosted on Azure App Service:
